@@ -11,12 +11,10 @@ function checkPostgresReady() {
       process.stdout.write(".");
       checkPostgresReady();
       return;
-    } else {
-      console.log("\nPostgreSQL is ready!\n");
-      process.exit(0);
     }
+    console.log("\n \n🟢 PostgreSQL is ready and accepting connections!\n");
   }
 }
 
-process.stdout.write("\n\nWaiting for PostgreSQL to be ready");
+process.stdout.write("\n\n🔴 Waiting for PostgreSQL to be ready");
 checkPostgresReady();
