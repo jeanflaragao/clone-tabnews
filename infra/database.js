@@ -7,7 +7,7 @@ async function query(queryObject) {
     const result = await client.query(queryObject);
     return result;
   } catch (error) {
-    console.error( "Erro na conexão com Banco ou na Query.");
+    console.error("Erro na conexão com Banco ou na Query.");
   } finally {
     await client?.end();
   }

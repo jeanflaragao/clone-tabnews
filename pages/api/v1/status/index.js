@@ -5,7 +5,7 @@ async function status(req, res) {
   const dataBaseVersionValue = dataBaseVersionResult.rows[0].server_version;
 
   const dataBaseMaxConnectionsResult = await database.query(
-    "SHOW max_connections;"
+    "SHOW max_connections;",
   );
   const dataBaseMaxConnectionsValue =
     dataBaseMaxConnectionsResult.rows[0].max_connections;
