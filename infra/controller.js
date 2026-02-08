@@ -6,8 +6,11 @@ function onNoMatchHandler(req, res) {
 }
 
 function onErrorHandler(err, req, res) {
-  console.error("Unexpected error in status endpoint:", err);
-  const publicErrorObject = new InternalServerError({ cause: err });
+  const publicErrorObject = new InternalServerError({
+    cause: err,
+  });
+
+  console.error(publicErrorObject);
   res.status(publicErrorObject.statusCode).json(publicErrorObject);
 }
 
