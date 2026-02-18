@@ -10,7 +10,14 @@ async function create(username, email, password) {
 
   async function validateUniqueUserName(username) {
     const result = await database.query({
-      text: `SELECT id FROM users WHERE LOWER(username) = LOWER($1);`,
+      text: `
+      SELECT
+        username
+      FROM
+        users
+      WHERE
+        LOWER(username) = LOWER($1)
+      ;`,
       values: [username],
     });
 
@@ -24,7 +31,14 @@ async function create(username, email, password) {
 
   async function validateUniqueEmail(email) {
     const result = await database.query({
-      text: `SELECT id FROM users WHERE LOWER(email) = LOWER($1);`,
+      text: `
+      SELECT
+        email
+      FROM
+        users
+      WHERE
+        LOWER(email) = LOWER($1)
+      ;`,
       values: [email],
     });
 
@@ -38,7 +52,11 @@ async function create(username, email, password) {
 
   async function runInsertQuery(username, email, password) {
     const result = await database.query({
-      text: `INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *;`,
+      text: `
+      INSERT INTO users (username, email, password)
+      VALUES ($1, $2, $3)
+      RETURNING *;
+      `,
       values: [username, email, password],
     });
     return result[0];
