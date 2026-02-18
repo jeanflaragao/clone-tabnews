@@ -1,4 +1,9 @@
-const { MethodNotAllowedError, InternalServerError } = require("./errors");
+const {
+  MethodNotAllowedError,
+  InternalServerError,
+  ValidationError,
+  NotFoundError,
+} = require("./errors");
 
 function onNoMatchHandler(req, res) {
   const publicErrorObject = new MethodNotAllowedError({ method: req.method });
@@ -6,6 +11,11 @@ function onNoMatchHandler(req, res) {
 }
 
 function onErrorHandler(err, req, res) {
+  if (err instanceof ValidationError || err instanceof NotFoundError) {
+    res.status(err.statusCode).json(err);
+    return;
+  }
+
   const publicErrorObject = new InternalServerError({
     cause: err,
   });
